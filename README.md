@@ -82,7 +82,7 @@ Make sure you have the following installed:
 1. **Clone the repository**:
 
    ```bash
-   git clone https://github.com/yourusername/stack-stories.git
+   git clone https://github.com/Rehan1908/stack-stories.git
    cd stack-stories
    ```
 
@@ -122,8 +122,8 @@ Make sure you have the following installed:
 ## 🚀 Usage
 
 <!----><a name="usage"></a>
-- **Frontend**: The React app will run at `http://localhost:3000`.
-- **Backend**: The Express server will run at `http://localhost:5000`.
+- **Frontend**: The React app will run at `http://localhost:5173`.
+- **Backend**: The Express server will run at `http://localhost:3000`.
 
 ---
 
@@ -147,7 +147,7 @@ Make sure you have the following installed:
 ## 🤝 Contributing
 
 <!----><a name="contributing"></a>
-Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/yourusername/stack-stories/issues).
+Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/Rehan1908/Stack-Stories/issues).
 
 1. Fork the repository
 2. Create your feature branch: `git checkout -b feature/your-feature`
