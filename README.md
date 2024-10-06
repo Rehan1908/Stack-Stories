@@ -141,17 +141,11 @@ Make sure you have the following installed:
 
 Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/yourusername/stack-stories/issues).
 
-1. Fork the repositor
+1. Fork the repository
 2. Create your feature branch: `git checkout -b feature/your-feature`
 3. Commit your changes: `git commit -m 'Add your feature'`
 4. Push to the branch: `git push origin feature/your-feature`
 5. Open a pull request
-
----
-
-## 📝 License
-
-This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
 
 ---
 
