@@ -19,6 +19,7 @@
 
 ## ✨ Features
 
+<!----><a name="features"></a>
 - **User Authentication**: Secure registration and login with JSON Web Tokens (JWT).
 - **CRUD Operations**: Easily create, edit, and delete blog posts.
 - **Responsive Design**: Optimized for both desktop and mobile devices.
@@ -30,6 +31,7 @@
 
 ## 💻 Tech Stack
 
+<!----><a name="tech-stack"></a>
 - **Frontend**: React.js, HTML5, CSS3, Bootstrap
 - **Backend**: Node.js, Express.js
 - **Database**: MongoDB
@@ -41,6 +43,7 @@
 
 ## 🏗️ Project Structure
 
+<!----><a name="project-structure"></a>
 ```
 stack-stories/
 ├── client/           # Frontend React app
@@ -64,6 +67,8 @@ stack-stories/
 ---
 
 ## ⚙️ Installation
+
+<!----><a name="installation"></a>
 
 ### Prerequisites
 
@@ -117,12 +122,15 @@ Make sure you have the following installed:
 
 ## 🚀 Usage
 
+<!----><a name="usage"></a>
 - **Frontend**: The React app will run at `http://localhost:3000`.
 - **Backend**: The Express server will run at `http://localhost:5000`.
 
 ---
 
 ## 🔗 API Endpoints
+
+<!----><a name="api-endpoints"></a>
 
 | Method | Endpoint                     | Description                          |
 |--------|------------------------------|--------------------------------------|
@@ -139,6 +147,7 @@ Make sure you have the following installed:
 
 ## 🤝 Contributing
 
+<!----><a name="contributing"></a>
 Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/yourusername/stack-stories/issues).
 
 1. Fork the repository
