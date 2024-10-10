@@ -133,8 +133,8 @@ Make sure you have the following installed:
 
 | Method | Endpoint                     | Description                          |
 |--------|------------------------------|--------------------------------------|
-| POST   | `/api/auth/register`         | Register a new user                  |
-| POST   | `/api/auth/login`            | User login                           |
+| POST   | `/api/auth/signup`           | Register a new user                  |
+| POST   | `/api/auth/signin`           | User login                           |
 | GET    | `/api/posts`                 | Get all blog posts                   |
 | POST   | `/api/posts`                 | Create a new post                    |
 | GET    | `/api/posts/:id`             | Get a specific post by ID            |
