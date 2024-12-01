@@ -2,17 +2,23 @@ import { Button, Select, TextInput } from 'flowbite-react';
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import PostCard from '../components/PostCard';
+
 export default function Search() {
   const [sidebarData, setSidebarData] = useState({
     searchTerm: '',
     sort: 'desc',
     category: 'uncategorized',
   });
+
+  console.log(sidebarData);
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showMore, setShowMore] = useState(false);
+
   const location = useLocation();
+
   const navigate = useNavigate();
+
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
     const searchTermFromUrl = urlParams.get('searchTerm');
@@ -26,6 +32,7 @@ export default function Search() {
         category: categoryFromUrl,
       });
     }
+
     const fetchPosts = async () => {
       setLoading(true);
       const searchQuery = urlParams.toString();
@@ -47,17 +54,21 @@ export default function Search() {
     };
     fetchPosts();
   }, [location.search]);
+
   const handleChange = (e) => {
     if (e.target.id === 'searchTerm') {
       setSidebarData({ ...sidebarData, searchTerm: e.target.value });
     }
     if (e.target.id === 'sort') {
-      setSidebarData({ ...sidebarData, sort: e.target.value });
+      const order = e.target.value || 'desc';
+      setSidebarData({ ...sidebarData, sort: order });
     }
     if (e.target.id === 'category') {
-      setSidebarData({ ...sidebarData, category: e.target.value });
+      const category = e.target.value || 'uncategorized';
+      setSidebarData({ ...sidebarData, category });
     }
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const urlParams = new URLSearchParams(location.search);
@@ -67,6 +78,7 @@ export default function Search() {
     const searchQuery = urlParams.toString();
     navigate(`/search?${searchQuery}`);
   };
+
   const handleShowMore = async () => {
     const numberOfPosts = posts.length;
     const startIndex = numberOfPosts;
@@ -87,14 +99,12 @@ export default function Search() {
       }
     }
   };
+
   return (
     <div className='flex flex-col md:flex-row'>
       <div className='p-7 border-b md:border-r md:min-h-screen border-gray-500'>
-        <form
-          className='flex flex-col gap-8'
-          onSubmit={handleSubmit}
-        >
-          <div className='flex items-center gap-2'>
+        <form className='flex flex-col gap-8' onSubmit={handleSubmit}>
+          <div className='flex   items-center gap-2'>
             <label className='whitespace-nowrap font-semibold'>
               Search Term:
             </label>
@@ -108,11 +118,7 @@ export default function Search() {
           </div>
           <div className='flex items-center gap-2'>
             <label className='font-semibold'>Sort:</label>
-            <Select
-              onChange={handleChange}
-              value={sidebarData.sort}
-              id='sort'
-            >
+            <Select onChange={handleChange} value={sidebarData.sort} id='sort'>
               <option value='desc'>Latest</option>
               <option value='asc'>Oldest</option>
             </Select>
@@ -130,11 +136,7 @@ export default function Search() {
               <option value='javascript'>JavaScript</option>
             </Select>
           </div>
-          <Button
-            type='submit'
-            outline
-            gradientDuoTone='purpleToPink'
-          >
+          <Button type='submit' outline gradientDuoTone='purpleToPink'>
             Apply Filters
           </Button>
         </form>
@@ -150,22 +152,17 @@ export default function Search() {
           {loading && <p className='text-xl text-gray-500'>Loading...</p>}
           {!loading &&
             posts &&
-            posts.sort((a, b) => {
-              if (sidebarData.sort === 'desc') {
-                return b.createdAt.localeCompare(a.createdAt);
-              }
-              return a.createdAt.localeCompare(b.createdAt);
-            }).map((post) => <PostCard key={post._id} post={post} />)}
+            posts.map((post) => <PostCard key={post._id} post={post} />)}
+          {showMore && (
+            <button
+              onClick={handleShowMore}
+              className='text-teal-500 text-lg hover:underline p-7 w-full'
+            >
+              Show More
+            </button>
+          )}
         </div>
-        {showMore && (
-          <Button
-            onClick={handleShowMore}
-            gradientDuoTone='purpleToPink'
-          >
-            Show More
-          </Button>
-        )}
       </div>
     </div>
   );
-};
+}
