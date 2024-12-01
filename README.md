@@ -48,21 +48,22 @@ stack-stories/
 ├── client/           # Frontend React app
 │   ├── public/
 │   ├── src/
+│   │   ├── assets/        # Static assets
 │   │   ├── components/    # Reusable UI components
 │   │   ├── pages/         # Application pages (Home, Login, Blog Post, etc.)
-│   │   ├── services/      # API calls and services
-│   │   └── App.js         # Main application file
+│   │   ├── redux/         # State management
+│   │   ├── App.jsx        # Main application file
+│   │   └── main.jsx       # Application entry point
 │   └── package.json
-├── server/           # Backend Node.js app
+├── api/              # Backend Node.js app
 │   ├── controllers/   # Route logic for the blog
 │   ├── models/        # MongoDB models
 │   ├── routes/        # API routes (CRUD for blog, auth routes)
-│   ├── config/        # Configuration files (DB connection, etc.)
-│   └── package.json
+│   ├── utils/         # Utility functions
+│   └── index.js       # Entry point for the backend server
 ├── .gitignore        # Ignored files and folders
-└── README.md         # Project documentation
-```
-
+├── README.md         # Project documentation
+└── package.json      # Node.js dependencies
 ---
 
 ## ⚙️ Installation
@@ -131,16 +132,27 @@ Make sure you have the following installed:
 
 <!----><a name="api-endpoints"></a>
 
-| Method | Endpoint                     | Description                          |
-|--------|------------------------------|--------------------------------------|
-| POST   | `/api/auth/signup`           | Register a new user                  |
-| POST   | `/api/auth/signin`           | User login                           |
-| GET    | `/api/posts`                 | Get all blog posts                   |
-| POST   | `/api/posts`                 | Create a new post                    |
-| GET    | `/api/posts/:id`             | Get a specific post by ID            |
-| PUT    | `/api/posts/:id`             | Update a post by ID                  |
-| DELETE | `/api/posts/:id`             | Delete a post by ID                  |
-| POST   | `/api/posts/:id/comments`    | Add a comment to a post              |
+| Method | Endpoint                                     | Description                          |
+|--------|---------------------------------------------|--------------------------------------|
+| POST   | `/api/auth/signup`                          | Register a new user                  |
+| POST   | `/api/auth/signin`                          | User login                           |
+| POST   | `/api/auth/google`                          | Sign in with Google                  |
+| POST   | `/api/comment/create`                       | Create a new comment                 |
+| GET    | `/api/comment/getPostComments/:postId`      | Get all comments for a post          |
+| PUT    | `/api/comment/likeComment/:commentId`       | Like a comment                       |
+| PUT    | `/api/comment/editComment/:commentId`       | Edit a comment                       |
+| DELETE | `/api/comment/deleteComment/:commentId`     | Delete a comment                     |
+| GET    | `/api/comment/getcomments`                  | Get all comments for a user          |
+| POST   | `/api/post/create`                          | Create a new post                    |
+| GET    | `/api/post/getposts`                        | Get all blog posts                   |
+| DELETE | `/api/post/deletepost/:postId/:userId`      | Delete a post                        |
+| PUT    | `/api/post/updatepost/:postId/:userId`      | Update a post                        |
+| GET    | `/api/post/test`                            | Test endpoint                        |
+| PUT    | `/api/user/update/:userId`                  | Update a user profile                |
+| DELETE | `/api/user/delete/:userId`                  | Delete a user profile                |
+| POST   | `/api/auth/signout`                         | Sign out a user                      |
+| GET    | `/api/user/getusers`                        | Get all users                        |
+| GET    | `/api/user/:userId`                         | Get a specific user                  |
 
 ---
 
