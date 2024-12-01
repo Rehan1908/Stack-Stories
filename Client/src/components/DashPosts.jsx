@@ -1,4 +1,4 @@
-import { Modal, Table, Button } from 'flowbite-react';
+import { Modal, Table, Button, Spinner } from 'flowbite-react';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -10,9 +10,11 @@ export default function DashPosts() {
   const [showMore, setShowMore] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [postIdToDelete, setPostIdToDelete] = useState('');
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchPosts = async () => {
+      setLoading(true);
       try {
         const res = await fetch(
           `/api/post/getposts${currentUser.isAdmin ? '' : `?userId=${currentUser._id}`}`
@@ -24,8 +26,10 @@ export default function DashPosts() {
             setShowMore(false);
           }
         }
+        setLoading(false);
       } catch (error) {
         console.log(error.message);
+        setLoading(false);
       }
     };
 
@@ -35,6 +39,7 @@ export default function DashPosts() {
   }, [currentUser]);
 
   const handleShowMore = async () => {
+    setLoading(true);
     const startIndex = userPosts.length;
     try {
       const res = await fetch(
@@ -47,13 +52,16 @@ export default function DashPosts() {
           setShowMore(false);
         }
       }
+      setLoading(false);
     } catch (error) {
       console.log(error.message);
+      setLoading(false);
     }
   };
 
   const handleDeletePost = async () => {
     setShowModal(false);
+    setLoading(true);
     try {
       const res = await fetch(
         `/api/post/deletepost/${postIdToDelete}/${currentUser._id}`,
@@ -69,8 +77,10 @@ export default function DashPosts() {
           prev.filter((post) => post._id !== postIdToDelete)
         );
       }
+      setLoading(false);
     } catch (error) {
       console.log(error.message);
+      setLoading(false);
     }
   };
 
@@ -146,7 +156,7 @@ export default function DashPosts() {
           )}
         </>
       ) : (
-        <p>You have no posts yet!</p>
+        <p className='text-center'>You have no posts yet!</p>
       )}
       <Modal
         show={showModal}
@@ -172,6 +182,11 @@ export default function DashPosts() {
           </div>
         </Modal.Body>
       </Modal>
+      {loading && (
+        <div className='absolute inset-0 bg-gray-300/50 dark:bg-slate-800/50 flex items-center justify-center'>
+          <Spinner color='info' size='xl' />
+        </div>
+      )}
     </div>
   );
 }

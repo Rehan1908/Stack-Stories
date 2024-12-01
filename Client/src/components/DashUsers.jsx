@@ -1,17 +1,19 @@
-import { Modal, Table, Button } from 'flowbite-react';
+import { Modal, Table, Button, Spinner } from 'flowbite-react';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
 import { FaCheck, FaTimes } from 'react-icons/fa';
 
 export default function DashUsers() {
-  const { currentUser } = useSelector((state) => state.user);
+  const { currentUser, loading: userLoading } = useSelector((state) => state.user);
   const [users, setUsers] = useState([]);
   const [showMore, setShowMore] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [userIdToDelete, setUserIdToDelete] = useState('');
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     const fetchUsers = async () => {
+      setLoading(true);
       try {
         const res = await fetch(`/api/user/getusers`);
         const data = await res.json();
@@ -23,6 +25,8 @@ export default function DashUsers() {
         }
       } catch (error) {
         console.log(error.message);
+      } finally {
+        setLoading(false);
       }
     };
     if (currentUser.isAdmin) {
@@ -32,6 +36,7 @@ export default function DashUsers() {
 
   const handleShowMore = async () => {
     const startIndex = users.length;
+    setLoading(true);
     try {
       const res = await fetch(`/api/user/getusers?startIndex=${startIndex}`);
       const data = await res.json();
@@ -43,10 +48,13 @@ export default function DashUsers() {
       }
     } catch (error) {
       console.log(error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleDeleteUser = async () => {
+    setLoading(true);
     try {
         const res = await fetch(`/api/user/delete/${userIdToDelete}`, {
             method: 'DELETE',
@@ -60,12 +68,16 @@ export default function DashUsers() {
         }
     } catch (error) {
         console.log(error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <div className='table-auto overflow-x-scroll md:mx-auto p-3 scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500'>
-      {currentUser.isAdmin && users.length > 0 ? (
+      {(userLoading || loading) ? (
+        <div className='flex items-center justify-center'><Spinner /></div>
+      ) : (currentUser.isAdmin && users.length > 0 ? (
         <>
           <Table hoverable className='shadow-md'>
             <Table.Head>
@@ -124,7 +136,7 @@ export default function DashUsers() {
         </>
       ) : (
         <p>You have no users yet!</p>
-      )}
+      ))}
       <Modal
         show={showModal}
         onClose={() => setShowModal(false)}
@@ -152,3 +164,5 @@ export default function DashUsers() {
     </div>
   );
 }
+
+
