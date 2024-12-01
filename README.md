@@ -31,7 +31,7 @@
 ## 💻 Tech Stack
 
 <!----><a name="tech-stack"></a>
-- **Frontend**: React.js, HTML5, CSS3, Bootstrap
+- **Frontend**: React.js, HTML5, CSS3, Tailwind
 - **Backend**: Node.js, Express.js
 - **Database**: MongoDB
 - **Authentication**: JSON Web Tokens (JWT)
